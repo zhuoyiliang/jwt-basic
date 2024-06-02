@@ -48,8 +48,10 @@ public class TenantFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         try {
-            JwtUtilsCustomer jwtUtilsCustomer = JwtUtilsCustomer.extractJwtFromRequest(request, response);
+
+            JwtUtilsCustomer jwtUtilsCustomer = new JwtUtilsCustomer().extractJwtFromRequest(request, response);
             String username = jwtUtilsCustomer.usernameFromJwt();
+
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
