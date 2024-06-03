@@ -61,6 +61,7 @@ public class JwtUtilsCustomer {
     }
 
 
+
     public static void main(String[] args) {
         // SecretKey key = Jwts.SIG.HS256.key().build();
         // String str = Base64.getEncoder().encodeToString(key.getEncoded());

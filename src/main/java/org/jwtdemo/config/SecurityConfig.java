@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,8 +40,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(this.users())
-                .httpBasic(Customizer.withDefaults())
-                // .formLogin(Customizer.withDefaults())
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new TenantFilter(this.users()), UsernamePasswordAuthenticationFilter.class)
                 .securityContext(securityContext -> securityContext
                         .securityContextRepository(new NullSecurityContextRepository()));
